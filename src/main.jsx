@@ -1,32 +1,21 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { BrowserRouter, Routes, Route, Navigate,} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { store } from "./Store";
 
-import ListTodo from "./ListTodo";
-import AddTodo from "./AddTodo";
+import AddStudent from "./AddStudent";
+import ListStudent from "./ListStudent";
 import UpdateTodo from "./UpdateTodo";
-import todoListReducer from "./todoListSlice";
 
-const store = configureStore({
-  reducer: {
-    todoList: todoListReducer,
-  },
-});
-
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/todolist" />} />
-
-          <Route path="/todolist" element={<ListTodo />} />
-          <Route path="/todolist/add" element={<AddTodo />} />
-          <Route path="/todolist/:id/edit" element={<UpdateTodo />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <BrowserRouter basename="/todolist">
+      <Routes>
+        <Route path="/" element={<ListStudent />} />
+        <Route path="/add" element={<AddStudent />} />
+        <Route path="/edit/:id" element={<UpdateTodo />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );

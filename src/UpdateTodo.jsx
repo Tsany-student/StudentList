@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodo, updateTodo } from "./todoListSlice";
+import { updateStudent } from "./studentSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateTodo() {
@@ -9,21 +9,27 @@ export default function UpdateTodo() {
   const dispatch = useDispatch();
 
   const todo = useSelector((state) =>
-    getTodo(state.todoList, Number(id))
+    state.todoList.find((t) => t.id === id)
   );
 
-  const [name, setName] = useState(todo?.name || "");
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    if (todo) {
+      setName(todo.name);
+    }
+  }, [todo]);
+
+  if (!todo) {
+    return <h2>Todo tidak ditemukan</h2>;
+  }
 
   const handleUpdateTodo = () => {
     if (!name.trim()) return;
 
-    dispatch(updateTodo({ id: todo.id, name }));
-    navigate("/todolist");
+    dispatch(updateStudent({ id, name }));
+    navigate("/");
   };
-
-  if (!todo) {
-    return <p>Todo not found</p>;
-  }
 
   return (
     <div>
@@ -32,7 +38,6 @@ export default function UpdateTodo() {
       <input
         type="text"
         value={name}
-        placeholder="Enter todo name"
         onChange={(e) => setName(e.target.value)}
       />
 

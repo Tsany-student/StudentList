@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoListReducer from "./todoListSlice";
+import studentReducer from "./studentSlice";
 
 export const store = configureStore({
   reducer: {
-    todoList: todoListReducer,
+    students: studentReducer,
   },
 });
