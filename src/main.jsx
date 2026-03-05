@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { store } from "./Store";
 
+import "./index.css"; 
+
 import AddStudent from "./AddStudent";
 import ListStudent from "./ListStudent";
 import UpdateTodo from "./UpdateTodo";
