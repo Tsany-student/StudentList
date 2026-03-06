@@ -54,3 +54,6 @@ export default function AddStudent() {
     </form>
   );
 }
+
+// fungsi dispacth di sini ngambil todolist, khusus reducer
+// kalo useSelecetor di sini ngambil todolist

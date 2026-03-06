@@ -6,6 +6,7 @@ const studentSlice = createSlice({
   name: "students",
   initialState,
   reducers: {
+
     addStudent: {
       reducer(state, action) {
         state.push(action.payload);
@@ -27,12 +28,17 @@ const studentSlice = createSlice({
     },
 
     updateStudent(state, action) {
-      return state.map((student) =>
-        student.id === action.payload.id
-          ? action.payload
-          : student
-      );
+      const { id, nama, kelas, alamat } = action.payload;
+
+      const student = state.find((s) => s.id === id);
+
+      if (student) {
+        student.nama = nama;
+        student.kelas = kelas;
+        student.alamat = alamat;
+      }
     },
+
   },
 });
 

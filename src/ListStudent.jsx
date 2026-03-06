@@ -32,9 +32,19 @@ export default function ListStudent() {
               <td>{student.kelas}</td>
               <td>{student.alamat}</td>
               <td>
-                <button onClick={() => dispatch(removeStudent(student.id))}>
+
+                <button
+                  onClick={() => navigate(`/update/${student.id}`)}
+                >
+                  Update
+                </button>
+
+                <button
+                  onClick={() => dispatch(removeStudent(student.id))}
+                >
                   Hapus
                 </button>
+
               </td>
             </tr>
           ))}

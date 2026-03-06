@@ -8,40 +8,62 @@ export default function UpdateTodo() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const todo = useSelector((state) =>
-    state.todoList.find((t) => t.id === id)
+  const student = useSelector((state) =>
+    state.students.find((s) => s.id === id)
   );
 
-  const [name, setName] = useState("");
+  const [nama, setNama] = useState("");
+  const [kelas, setKelas] = useState("");
+  const [alamat, setAlamat] = useState("");
 
   useEffect(() => {
-    if (todo) {
-      setName(todo.name);
+    if (student) {
+      setNama(student.nama);
+      setKelas(student.kelas);
+      setAlamat(student.alamat);
     }
-  }, [todo]);
+  }, [student]);
 
-  if (!todo) {
-    return <h2>Todo tidak ditemukan</h2>;
+  if (!student) {
+    return <h2>Student tidak ditemukan</h2>;
   }
 
-  const handleUpdateTodo = () => {
-    if (!name.trim()) return;
+  const handleUpdate = () => {
+    dispatch(
+      updateStudent({
+        id,
+        nama,
+        kelas,
+        alamat,
+      })
+    );
 
-    dispatch(updateStudent({ id, name }));
     navigate("/");
   };
 
   return (
     <div>
-      <h1>Edit Todo</h1>
+      <h2>Edit Student</h2>
 
       <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={nama}
+        onChange={(e) => setNama(e.target.value)}
+        placeholder="Nama"
       />
 
-      <button onClick={handleUpdateTodo}>Update</button>
+      <input
+        value={kelas}
+        onChange={(e) => setKelas(e.target.value)}
+        placeholder="Kelas"
+      />
+
+      <input
+        value={alamat}
+        onChange={(e) => setAlamat(e.target.value)}
+        placeholder="Alamat"
+      />
+
+      <button onClick={handleUpdate}>Update</button>
     </div>
   );
 }

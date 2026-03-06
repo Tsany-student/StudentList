@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<ListStudent />} />
         <Route path="/add" element={<AddStudent />} />
-        <Route path="/edit/:id" element={<UpdateTodo />} />
+        <Route path="/update/:id" element={<UpdateTodo />} />
       </Routes>
     </BrowserRouter>
   </Provider>
